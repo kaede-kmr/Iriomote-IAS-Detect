@@ -19,7 +19,7 @@ def plotMelspec(audio, plotfile, offset=0, duration=3):
   plt.close()
 
 
-# You need to download the audio file from dryad repository (see README.md)
+# You need to download the audio file from the data repository (see README.md)
 # 3b: Oct 07 2023, wild sounds including B. choui, P. leucomystax, and R. marina
 plotMelspec("annotated-samples/train/BUECHO,POLLEU,RHIMAR/NKSN_Okinawa_20231007_210000_48_51.wav", "figs/Fig3b.png")
 

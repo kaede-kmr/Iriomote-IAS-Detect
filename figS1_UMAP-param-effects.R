@@ -1,5 +1,9 @@
 # Figure S1 
-# UMAP parameter effects
+# Check UMAP parameter effects
+
+library(tidyverse)
+library(umap)
+library(patchwork)
 
 # Load data
 df <- read_csv("data/embeddings.csv")

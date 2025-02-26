@@ -3,21 +3,22 @@
 
 library(tidyverse)
 
-# Load and clean data
-df <- read_csv("data/call-segments_threshold0.5.csv")
+# Load data
+df1 <- read_csv("data/call-segments_threshold0.43.csv") |> 
+  filter(species == "POLLEU" & site != "4")
 
-df2 <- df |> 
-  filter(species %in% c("POLLEU", "RHIMAR") & site != "4") |> 
+df2 <- read_csv("data/call-segments_threshold0.92.csv") |> 
+  filter(species == "RHIMAR" & site != "4")
+
+# Bind two data and make a plot
+bind_rows(df1, df2) |> 
   mutate(
     species = case_when(
       species=="POLLEU" ~ "Polypedates leucomystax",
       species=="RHIMAR" ~ "Rhinella marina"
     )
-  )
-
-
-# Plot
-ggplot(df2, aes(date, as.character(site), fill=num_call_segments))+
+  ) |> 
+  ggplot(aes(date, as.character(site), fill=num_call_segments))+
   geom_tile()+
   scale_fill_distiller(palette = "Blues", direction = 1)+
   facet_wrap("species", ncol=1)+
@@ -36,4 +37,3 @@ ggplot(df2, aes(date, as.character(site), fill=num_call_segments))+
   )
 
 ggsave("figs/Fig4.png", w=174, h=85, units = "mm", dpi=600) 
-
